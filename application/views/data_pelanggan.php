@@ -279,6 +279,7 @@ function detail_hutang(id_pelanggan)
 {
   $.get("<?php echo base_url()?>index.php/pelanggan/detail_hutang_pelanggan/"+id_pelanggan,function(e){
     $("#t4_detail_hutang").html(e);
+    $("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
   })
 }
 

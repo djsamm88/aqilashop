@@ -78,7 +78,7 @@ if(isset($group_penjualan))
     </section>
 
     <!-- Main content -->
-    <section class="content container-fluid" >
+    <section class="content container-fluid" id="bodynya">
 
       <!--------------------------
         | Your Page Content Here |
@@ -189,7 +189,7 @@ if(isset($group_penjualan))
           </td>
           <td></td>
         </tr>
-        
+        <!--
         <?php 
         if($group_penjualan!="")
         {?>
@@ -222,13 +222,15 @@ if(isset($group_penjualan))
           <td></td>
         </tr>
       <?php } ?>
+    -->
 
 
 
-      
+      <!--
         <?php 
         if($group_penjualan=="")
         {?>
+
         <tr>
           
           <td colspan="7" align="right"><b>Ekspedisi</b></td>
@@ -259,6 +261,39 @@ if(isset($group_penjualan))
           <td></td>
         </tr>
       <?php } ?>
+    -->
+
+
+
+    <tr>
+          
+          <td colspan="7" align="right"><b>Ekspedisi</b></td>
+          <td  align="right" >
+            
+            <select class="form-control" id="province_id" name="province_id">              
+            </select>
+            <select class="form-control" id="city_id" name="city_id">              
+            </select>
+            <select class="form-control" id="subdistrict_id" name="subdistrict_id">              
+            </select>
+            <select class="form-control" id="courier" name="courier">              
+            </select>
+
+            <select class="form-control" id="service" name="service">              
+            </select>
+
+            <input id="ongkir" type="text" name="harga_ekspedisi" class="form-control nomor" style="text-align:right;" readonly value="<?php echo @$data[0]->harga_ekspedisi?>">
+
+            
+            
+            <input type="hidden" id="t4_service" name="nama_ekspedisi">
+            <input type="hidden" id="t4_alamat_lengkap" name="alamat">
+            
+
+
+          </td>
+          <td></td>
+        </tr>
 
         <tr>
           <td colspan="7" align="right"><b>Total</b></td>
@@ -286,9 +321,16 @@ if(isset($group_penjualan))
 
         
         <tr>
-          <td colspan="7" align="right"><b>Sales</b></td>
+          <td colspan="7" align="right"><b>BANK</b></td>
           <td  align="right" >
-            <input id="id_sales" type="text" name="id_sales" class="form-control " placeholder="id_sales" style="text-align:right;">
+            <select id="bank" type="text" name="bank" class="form-control " placeholder="bank" style="text-align:right;">
+                <option value="">--- Pilih Bank ---</option>
+                <option value="BRI">BRI</option>
+                <option value="MANDIRI">MANDIRI</option>
+                <option value="BCA">BCA</option>
+                <option value="BNI">BNI</option>
+
+            </select>
           </td>
           <td></td>
         </tr>
@@ -299,11 +341,11 @@ if(isset($group_penjualan))
   </table>
 </div>
   <textarea class="form-control" name="keterangan" placeholder="keterangan"><?php echo $keterangan?></textarea><br>
-  <!--
+  
 <div class="col-sm-6" style="text-align: left;">
     <input type="button" value="Pending" class="btn btn-warning" id="simpan_pending"> 
 </div>
--->
+
 
 <div class="col-sm-6" style="text-align: right;">
     <input type="submit" value="Bayar" class="btn btn-primary" id="simpan"> 
@@ -601,7 +643,7 @@ $( function() {
                 */
                 response($.map(data, function(obj) {
                     return {
-                        label: obj.nama_barang +" - "+obj.id,
+                        label: obj.nama_barang +" - "+obj.id_barcode,
                         value: obj.id,
                         stok: obj.qty,
                         harga_retail: obj.harga_retail, 
@@ -611,7 +653,7 @@ $( function() {
                         jum_per_lusin: obj.jum_per_lusin, 
                         reminder: obj.reminder, 
                         berat:obj.berat,
-                        nama_barang:obj.nama_barang +" - "+obj.id,
+                        nama_barang:obj.nama_barang +" - "+obj.id_barcode,
                         id:obj.id,
                         qty:obj.qty
                     };
@@ -836,7 +878,7 @@ $("#tbl_datanya").on("keydown keyup mousedown mouseup select contextmenu drop","
 
 
 
-$("body").on("keydown keyup mousedown mouseup select contextmenu drop",function(){
+$("#bodynya").on("keydown keyup mousedown mouseup select contextmenu drop",function(){
   total();
 })
 

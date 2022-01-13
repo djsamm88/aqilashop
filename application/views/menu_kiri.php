@@ -177,11 +177,7 @@
           </li>
 
 
-             <li>
-              <a href="#" onclick="eksekusi_controller('<?php echo base_url()?>index.php/barang/lap_pending/?id_cabang=<?php echo $this->session->userdata('id_cabang')?>','Transaksi Pending');return false;">
-                <i class="fa fa-link"></i> <span>Pending  <span class="label label-danger pull-right badge_pending"></span></span>
-              </a>
-            </li>
+            
 
 
             <li>
@@ -388,6 +384,12 @@
               </a>
             </li>
 
+             <li>
+              <a href="#" onclick="eksekusi_controller('<?php echo base_url()?>index.php/laporan_keuangan/laporan_jurnal_hapus/?tgl_awal=<?php echo date('Y-m-').'01'?>&tgl_akhir=<?php echo date('Y-m-d',strtotime('+1 days'));?>','Laporan Jurnal Hapus');return false;">
+                <i class="fa fa-link"></i> <span>Jurnal Hapus</span>
+              </a>
+            </li>
+
 
              <li>
               <a href="#" onclick="eksekusi_controller('<?php echo base_url()?>index.php/laporan_keuangan/arus_kas','Laporan Arus Kas');return false;">
@@ -419,7 +421,11 @@
           </a>
         </li>
 
-
+         <li>
+              <a href="#" onclick="eksekusi_controller('<?php echo base_url()?>index.php/barang/lap_pending/?id_cabang=<?php echo $this->session->userdata('id_cabang')?>','Transaksi Pending');return false;">
+                <i class="fa fa-link"></i> <span>Pending  <span class="label label-danger pull-right badge_pending"></span></span>
+              </a>
+            </li>
         
 
 
@@ -542,6 +548,8 @@
                 <i class="fa fa-link"></i> <span>Jurnal</span>
               </a>
             </li>
+
+           
 
 
              <li>

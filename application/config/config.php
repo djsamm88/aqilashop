@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/pos.cv-hps.co.id/';
+$config['base_url'] = 'http://localhost/aqillashop/';
 
 /*
 |--------------------------------------------------------------------------
@@ -524,6 +524,6 @@ $config['proxy_ips'] = '';
 
 
 $config['app_name']="APLIKASI KASIR";
-$config['app_client1']="TAMORA STORE";
+$config['app_client1']="AQILLA STORE";
 $config['app_client2']="Medan";
 $config['app_client3']="Sumatera Utara";

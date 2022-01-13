@@ -106,7 +106,7 @@
                 <td>
                   <button class='btn btn-primary btn-block btn-xs' onclick='proses_pending(\"$x->grup_penjualan\")'>Proses</button>
 
-                    <button class='btn btn-danger btn-block btn-xs' onclick='hapus_pending(\"$x->grup_penjualan\")'>Hapus</button>
+                    <button class='btn btn-danger btn-block btn-xs' onclick='hapus_pending(\"$x->grup_penjualan\")'>Batalkan</button>
                 </td>                                
               </tr>
           ");

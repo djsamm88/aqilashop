@@ -11,7 +11,14 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 
 	public function nama_barang($id)
 	{
-		$q = $this->db->query("SELECT nama_barang FROM tbl_barang WHERE id='$id'");
+		$q = $this->db->query("SELECT nama_barang,id_barcode FROM tbl_barang WHERE id='$id'");
+		return $q->result()[0];
+	}
+
+
+	public function nama_barang_by_barcode($id_barcode)
+	{
+		$q = $this->db->query("SELECT nama_barang FROM tbl_barang WHERE id_barcode='$id_barcode'");
 		return $q->result()[0];
 	}
 
@@ -83,7 +90,8 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 				a.id_barang,
 				a.nama_barang,
 				IFNULL(SUM(a.masuk),0) AS masuk,
-				IFNULL(SUM(a.keluar),0) AS keluar
+				IFNULL(SUM(a.keluar),0) AS keluar,
+				IFNULL(SUM(a.pending_keluar),0) AS pending_keluar,
 				FROM
 				(						
 					SELECT 
@@ -91,7 +99,8 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 					a.id_barang,
 					a.nama_barang,
 					CASE WHEN a.jenis='masuk' THEN a.jumlah END AS masuk,
-					CASE WHEN a.jenis='keluar' THEN a.jumlah  END AS keluar
+					CASE WHEN a.jenis='keluar' THEN a.jumlah  END AS keluar,
+					CASE WHEN a.jenis='pending_keluar' THEN a.jumlah  END AS pending_keluar
 					FROM 
 					(							
 						SELECT 
@@ -141,7 +150,7 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 											GROUP BY id_barang
 											)a 
 											LEFT JOIN 
-											(SELECT id_barang,SUM(jumlah) AS qty FROM `tbl_barang_transaksi` WHERE jenis='keluar' AND id_cabang='$id_cabang'
+											(SELECT id_barang,SUM(jumlah) AS qty FROM `tbl_barang_transaksi` WHERE jenis='keluar' OR jenis='pending_keluar' AND id_cabang='$id_cabang'
 											GROUP BY id_barang
 											)b 
 											ON a.id_barang=b.id_barang 
@@ -175,7 +184,7 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 											GROUP BY id_barang
 											)a 
 											LEFT JOIN 
-											(SELECT id_barang,SUM(jumlah) AS qty FROM `tbl_barang_transaksi` WHERE jenis='keluar' AND id_cabang='$id_cabang'
+											(SELECT id_barang,SUM(jumlah) AS qty FROM `tbl_barang_transaksi` WHERE jenis='keluar' OR jenis='pending_keluar'AND id_cabang='$id_cabang'
 											GROUP BY id_barang
 											)b 
 											ON a.id_barang=b.id_barang 
@@ -211,7 +220,7 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 											GROUP BY id_barang
 											)a 
 											LEFT JOIN 
-											(SELECT id_barang,SUM(jumlah) AS qty FROM `tbl_barang_transaksi` WHERE jenis='keluar' AND id_cabang='$id_cabang'
+											(SELECT id_barang,SUM(jumlah) AS qty FROM `tbl_barang_transaksi` WHERE jenis='keluar' OR jenis='pending_keluar' AND id_cabang='$id_cabang'
 											GROUP BY id_barang
 											)b 
 											ON a.id_barang=b.id_barang 
@@ -246,7 +255,7 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 											GROUP BY id_barang,id_gudang
 											)a 
 											LEFT JOIN 
-											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='keluar' GROUP BY id_barang,id_gudang
+											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='keluar' OR jenis='pending_keluar' GROUP BY id_barang,id_gudang
 											)b 
 											ON a.id_barang=b.id_barang AND a.id_gudang=b.id_gudang
 								)b
@@ -272,7 +281,7 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='masuk' GROUP BY id_barang,id_gudang
 											)a 
 											LEFT JOIN 
-											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='keluar' GROUP BY id_barang,id_gudang
+											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='keluar' OR jenis='pending_keluar' GROUP BY id_barang,id_gudang
 											)b 
 											ON a.id_barang=b.id_barang AND a.id_gudang=b.id_gudang
 								)b
@@ -299,7 +308,7 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='masuk' GROUP BY id_barang,id_gudang
 											)a 
 											LEFT JOIN 
-											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='keluar' GROUP BY id_barang,id_gudang
+											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='keluar' OR jenis='pending_keluar' GROUP BY id_barang,id_gudang
 											)b 
 											ON a.id_barang=b.id_barang AND a.id_gudang=b.id_gudang
 								)b
@@ -321,10 +330,10 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 											a.id_barang,a.id_gudang, 
 											IFNULL(a.qty,0)-IFNULL(b.qty,0) AS qty
 											 FROM 
-											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='masuk' GROUP BY id_barang,id_gudang
+											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='masuk'  GROUP BY id_barang,id_gudang
 											)a 
 											LEFT JOIN 
-											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='keluar' GROUP BY id_barang,id_gudang
+											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='keluar' OR jenis='pending_keluar'  GROUP BY id_barang,id_gudang
 											)b 
 											ON a.id_barang=b.id_barang AND a.id_gudang=b.id_gudang
 								)b
@@ -349,7 +358,7 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='masuk' GROUP BY id_barang,id_gudang
 											)a 
 											LEFT JOIN 
-											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='keluar' GROUP BY id_barang,id_gudang
+											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='keluar' OR jenis='pending_keluar' GROUP BY id_barang,id_gudang
 											)b 
 											ON a.id_barang=b.id_barang AND a.id_gudang=b.id_gudang
 								)b
@@ -376,7 +385,7 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='masuk' GROUP BY id_barang,id_gudang
 											)a 
 											LEFT JOIN 
-											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='keluar' GROUP BY id_barang,id_gudang
+											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='keluar' OR jenis='pending_keluar' GROUP BY id_barang,id_gudang
 											)b 
 											ON a.id_barang=b.id_barang AND a.id_gudang=b.id_gudang
 								)b
@@ -409,7 +418,7 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='masuk' GROUP BY id_barang,id_gudang
 											)a 
 											LEFT JOIN 
-											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='keluar' GROUP BY id_barang,id_gudang
+											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='keluar' OR jenis='pending_keluar' GROUP BY id_barang,id_gudang
 											)b 
 											ON a.id_barang=b.id_barang AND a.id_gudang=b.id_gudang
 								)b
@@ -443,7 +452,7 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 												(SELECT id_barang,SUM(jumlah) AS qty FROM `tbl_barang_transaksi` WHERE jenis='masuk' GROUP BY id_barang
 												)a 
 												LEFT JOIN 
-												(SELECT id_barang,SUM(jumlah) AS qty FROM `tbl_barang_transaksi` WHERE jenis='keluar' GROUP BY id_barang
+												(SELECT id_barang,SUM(jumlah) AS qty FROM `tbl_barang_transaksi` WHERE jenis='keluar' OR jenis='pending_keluar' GROUP BY id_barang
 												)b 
 												ON a.id_barang=b.id_barang 
 									)b ON a.id =b.id_barang								
@@ -561,7 +570,7 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 											(SELECT id_barang,SUM(jumlah) AS qty FROM `tbl_barang_transaksi` WHERE jenis='masuk' GROUP BY id_barang,id_gudang
 											)a 
 											LEFT JOIN 
-											(SELECT id_barang,SUM(jumlah) AS qty FROM `tbl_barang_transaksi` WHERE jenis='keluar' GROUP BY id_barang,id_gudang
+											(SELECT id_barang,SUM(jumlah) AS qty FROM `tbl_barang_transaksi` WHERE jenis='keluar' OR jenis='pending_keluar' GROUP BY id_barang,id_gudang
 											)b 
 											ON a.id_barang=b.id_barang 
 								)b
@@ -638,7 +647,7 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 				a.harga_ekspedisi,
 				a.transport_ke_ekspedisi,
 				a.id_pelanggan,
-				a.bayar,
+				a.bayar,				
 				b.nama_admin,
 				b.email_admin 
 			FROM tbl_barang_transaksi a
@@ -685,7 +694,7 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 			FROM tbl_barang_transaksi a
 			LEFT JOIN tbl_admin b ON a.id_admin=b.id_admin
 			LEFT JOIN tbl_barang c ON a.id_barang=c.id
-			WHERE a.jenis='keluar' AND (a.harga_beli <> 0 AND a.harga_jual <> 0) $where 
+			WHERE (a.jenis='keluar' OR a.jenis='pending_keluar')  AND (a.harga_beli <> 0 AND a.harga_jual <> 0) $where 
 				AND a.tgl_transaksi BETWEEN '$mulai' AND '$selesai' AND a.id_cabang='$id_cabang'			
 			ORDER BY tgl_transaksi DESC
 			");
@@ -718,7 +727,7 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 				b.email_admin 
 			FROM tbl_barang_transaksi a
 			LEFT JOIN tbl_admin b ON a.id_admin=b.id_admin
-			WHERE a.jenis='keluar' AND (a.harga_beli <> 0 AND a.harga_jual <> 0) $where 
+			WHERE (a.jenis='keluar' OR a.jenis='pending_keluar') AND (a.harga_beli <> 0 AND a.harga_jual <> 0) $where 
 				AND a.tgl_transaksi BETWEEN '$mulai' AND '$selesai' AND a.id_cabang='$id_cabang' AND a.id_pelanggan='$id_pelanggan'
 			GROUP BY grup_penjualan
 			ORDER BY tgl_transaksi DESC
@@ -753,7 +762,7 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 				b.email_admin 
 			FROM tbl_barang_transaksi a
 			LEFT JOIN tbl_admin b ON a.id_admin=b.id_admin
-			WHERE a.jenis='keluar' AND (a.harga_beli <> 0 AND a.harga_jual <> 0) $where
+			WHERE (a.jenis='keluar' OR a.jenis='pending_keluar') AND (a.harga_beli <> 0 AND a.harga_jual <> 0) $where
 			 	 AND a.tgl_transaksi BETWEEN '$mulai' AND '$selesai'
 			GROUP BY grup_penjualan
 			ORDER BY tgl_transaksi DESC

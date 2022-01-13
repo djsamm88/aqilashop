@@ -123,7 +123,7 @@ class Barang extends CI_Controller {
 			$serialize['nama_pembeli'] 	= $data['nama_pembeli'];
 			$serialize['hp_pembeli'] 	= $data['hp_pembeli'];
 			
-			$serialize['nama_packing'] 	= $data['nama_packing'];
+			
 			$serialize['tgl_trx_manual']= $data['tgl_trx_manual'];
 			$serialize['keterangan']	= $data['keterangan'];
 
@@ -141,6 +141,16 @@ class Barang extends CI_Controller {
 			$serialize['jum_per_koli']	= $barang->jum_per_koli;
 			$serialize['harga_beli']	= $barang->harga_pokok;
 			$serialize['id_gudang']		= '1';
+
+
+			$serialize['province_id']		= @$data['province_id'];
+			$serialize['city_id']			= @$data['city_id'];
+			$serialize['subdistrict_id']	= @$data['subdistrict_id'];
+			$serialize['courier']			= @$data['courier'];
+			$serialize['service']			= @$data['service'];
+			$serialize['berat_total']		= hanya_nomor($data['total_berat']);
+			
+			
 			
 
 
@@ -311,13 +321,14 @@ class Barang extends CI_Controller {
 
 		$hutang = $total_tanpa_diskon - hanya_nomor($data['bayar']);
 
-		$ket = "Kpd: [".$data['nama_pembeli']."] - Kode TRX:[".$data['grup_penjualan']."] 
-				Jumlah:[".rupiah($total_tanpa_diskon)."] 
-				Bayar:[".($data['bayar'])."] 
-				Hutang:[".rupiah($hutang)."] 
-				diskon:[".$data['diskon']."] 
-				harga_ekspedisi:[".$serialize['harga_ekspedisi']."] 
-				transport_ke_ekspedisi:[".$data['transport_ke_ekspedisi']."] 
+		$ket = "Kpd: [".$data['nama_pembeli']."] <br>
+				- Kode TRX:[".$data['grup_penjualan']."] <br>
+				Jumlah:[".rupiah($total_tanpa_diskon)."] <br>
+				Bayar:[".($data['bayar'])."] <br>
+				Hutang:[".rupiah($hutang)."] <br>
+				diskon:[".$data['diskon']."] <br>
+				harga_ekspedisi:[".$serialize['harga_ekspedisi']."] <br>
+				transport_ke_ekspedisi:[".$data['transport_ke_ekspedisi']."] <br>
 				".$data['keterangan'];
 
 		$ser_trx = array(
@@ -329,6 +340,7 @@ class Barang extends CI_Controller {
 						"harga_ekspedisi"			=> $serialize['harga_ekspedisi'],
 						"transport_ke_ekspedisi"	=> $serialize['transport_ke_ekspedisi'],
 						"id_referensi"	=> $data['grup_penjualan'],
+						"bank"	=> $data['bank'],
 						"id_pelanggan"	=> $id_pelanggan,
 						"hutang"	=> $hutang,
 						"id_cabang"		=> $id_cabang
@@ -386,7 +398,7 @@ class Barang extends CI_Controller {
 		
 
 		// sales //
-
+		/*
 		if($data['id_sales'] != "")
 		{	
 
@@ -410,6 +422,7 @@ class Barang extends CI_Controller {
 				$this->db->insert('tbl_sales_transaksi');
 			}
 		}
+		*/
 
 		
 		//utang/piutang
@@ -478,8 +491,18 @@ class Barang extends CI_Controller {
 	{
 	 echo "Berhasil hapus ".$grup_penjualan;   
 	 //hapus dari tbl_transaksi
-	    $this->db->query("DELETE FROM tbl_transaksi WHERE id_referensi='$grup_penjualan'");
+
+	    
+	   	$this->db->query("INSERT INTO tbl_transaksi_hapus SELECT * FROM tbl_transaksi WHERE id_referensi='$grup_penjualan'");
+
+	   	$this->db->query("INSERT INTO tbl_barang_transaksi_hapus SELECT * FROM tbl_barang_transaksi WHERE grup_penjualan='$grup_penjualan'");
+
+	   	$this->db->query("DELETE FROM tbl_transaksi WHERE id_referensi='$grup_penjualan'");
 	    $this->db->query("DELETE FROM tbl_barang_transaksi WHERE grup_penjualan='$grup_penjualan'");
+
+
+
+
 	}
 
 

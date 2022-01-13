@@ -135,6 +135,20 @@ class Laporan_keuangan extends CI_Controller {
 	}
 
 
+	public function laporan_jurnal_hapus()
+	{
+		$tgl_awal = $this->input->get('tgl_awal');
+		$tgl_akhir = $this->input->get('tgl_akhir');
+		$data['all'] = $this->m_laporan_keuangan->m_jurnal_hapus($tgl_awal,$tgl_akhir);
+		$data['tgl_awal'] = $tgl_awal;
+		$data['tgl_akhir'] = $tgl_akhir;
+		
+		$this->load->view('table_jurnal',$data);
+	}
+
+	
+
+
 	public function laporan_laba()
 	{
 		$tgl_awal = $this->input->get('tgl_awal');

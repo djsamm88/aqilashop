@@ -6,9 +6,9 @@
     $barang = $this->m_barang->nama_barang($value['id']);
 
     //echo $barang->nama_barang;
-    if($value['is_id']=='id')
+    if($value['is_id']=='barcode')
     {
-      $nama_barang = $value['id'];
+      $nama_barang = $barang->id_barcode;
     }else{
       $nama_barang = $barang->nama_barang;
     }

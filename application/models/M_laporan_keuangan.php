@@ -205,7 +205,8 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 								    a.nama AS group_trx,
 								    a.keterangan,
 									a.debet,
-									a.kredit
+									a.kredit,
+									a.bank
 									FROM
 									(
 										SELECT a.*,
@@ -228,6 +229,50 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 						");
 		return $q->result();
 	}
+
+
+
+	public function m_jurnal_hapus($tgl_awal,$tgl_akhir)
+	{
+		$id_cabang=$this->session->userdata('id_cabang');
+		$q = $this->db->query("
+							SELECT a.*,
+								IFNULL(a.debet,0)-IFNULL(a.kredit,0) AS saldo
+								FROM
+								(
+									SELECT
+									a.id,
+									a.tanggal,
+								    a.nama AS group_trx,
+								    a.keterangan,
+									a.debet,
+									a.kredit,
+									a.bank
+									FROM
+									(
+										SELECT a.*,
+										CASE WHEN a.jenis='masuk' THEN a.jumlah  END AS debet,
+										CASE WHEN a.jenis='keluar' THEN a.jumlah  END AS kredit
+										FROM 
+										(
+										SELECT a.*,(a.tgl_update) AS tanggal,b.nama,b.jenis FROM `tbl_transaksi_hapus` a 
+										INNER JOIN tbl_group_transaksi b 
+										ON a.id_group=b.id
+										WHERE a.id_cabang='$id_cabang'
+										)a
+										WHERE (a.jumlah*1)<>0
+									)a 
+								)a
+							WHERE 
+							a.tanggal BETWEEN '$tgl_awal' AND '$tgl_akhir'
+							
+							
+						");
+		return $q->result();
+	}
+
+
+
 
 	public function m_jurnal_pelanggan($id_pelanggan)
 	{
@@ -271,6 +316,9 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 						");
 		return $q->result();
 	}
+
+
+
 
 
 	public function m_laba($tgl_awal,$tgl_akhir)

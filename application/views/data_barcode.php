@@ -36,6 +36,7 @@
               
               <th>No</th>
               <th width="10px">Id Barang</th>           
+              <th width="10px">Id Barcode</th>           
               <th>Barang</th>                                                        
               <th>Jumlah</th>                     
                                 
@@ -56,13 +57,14 @@
               <tr>
                 <td>$no</td>
                 <td>$x->id</td>
+                <td>$x->id_barcode</td>
                 <td>$x->nama_barang</td>                
                 <td>
                   <input name='id_barang[]' type='hidden' value='$x->id'>
                   <input name='jumlah_barcode[]' class='form-control nomor' type=''>
                   <select name='is_id[]' class='form-control '>
                       <option value='nama'>Nama Barang</option>
-                      <option value='id'>Id Barang</option>
+                      <option value='barcode'>Barcode</option>
                   </select>
 
                 </td>                

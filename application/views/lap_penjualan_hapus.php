@@ -182,7 +182,7 @@ $("#go_trx_jurnal").on("submit",function(){
       return false;
     }
 
-    eksekusi_controller('<?php echo base_url()?>index.php/barang/lap_penjualan/?mulai='+mulai+'&selesai='+selesai+'&id_cabang='+id_cabang,'Laporan Penjualan');
+    eksekusi_controller('<?php echo base_url()?>index.php/barang/lap_penjualan_hapus/?mulai='+mulai+'&selesai='+selesai+'&id_cabang='+id_cabang,'Laporan Penjualan');
   return false;
 })
 
