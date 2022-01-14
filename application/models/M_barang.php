@@ -11,7 +11,7 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 
 	public function nama_barang($id)
 	{
-		$q = $this->db->query("SELECT nama_barang,id_barcode FROM tbl_barang WHERE id='$id'");
+		$q = $this->db->query("SELECT nama_barang,id_barcode,harga_retail FROM tbl_barang WHERE id='$id'");
 		return $q->result()[0];
 	}
 
@@ -833,11 +833,17 @@ public function m_pesanan_member($id_pelanggan='')
 				b.email_admin 
 			FROM tbl_barang_transaksi a
 			LEFT JOIN tbl_admin b ON a.id_admin=b.id_admin
-			WHERE a.jenis='pending_keluar' AND (a.harga_beli <> 0 AND a.harga_jual <> 0) $where AND a.id_cabang='$id_cabang'
+			WHERE a.jenis='pending_keluar' AND (a.harga_beli <> 0 AND a.harga_jual <> 0) $where 
+			
 			GROUP BY grup_penjualan
 			ORDER BY tgl_transaksi DESC
 			");
+
+
+
 		return $q->result();
+
+		
 	}
 
 	public function notif_pending($id_admin='')
