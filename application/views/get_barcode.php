@@ -14,7 +14,14 @@
     }
 
     echo "<table>";
+
+      echo "<tr>";
+      
+
     for ($i=0; $i < $value['jumlah_barcode'] ; $i++) { 
+
+      echo "<td>";
+      echo "<table>";
       echo "<tr>";
       echo "<td>";
       echo "<center><small>Rp.".rupiah($barang->harga_retail)."</small></center>";
@@ -27,17 +34,15 @@
       echo "</td>";
       echo "</tr>";
 
-      echo "<tr>";
-      echo "<td>";
-      //echo rupiah($barang->harga_retail)."<br>";
       echo "</td>";
-      echo "</tr>";
-
-      
+      echo "</table>";
       
     }
     
-    echo"<br><br>";
 
   }
+
+        
+      echo "</tr>";
+
 ?>
