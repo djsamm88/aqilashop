@@ -24,7 +24,7 @@
       echo "<table border='0'>";
       echo "<tr>";
       echo "<td>";
-      echo "<center><small>Rp.".rupiah($barang->harga_retail)."</small></center>";
+      echo "<center><b>Rp.".rupiah($barang->harga_retail)."</b></center>";
       echo "</td>";
       echo "</tr>";
 
