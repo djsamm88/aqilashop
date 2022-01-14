@@ -20,7 +20,7 @@
 
     for ($i=0; $i < $value['jumlah_barcode'] ; $i++) { 
 
-      echo "<td><center>";
+      echo "<td align='center'>";
       echo "<table>";
       echo "<tr>";
       echo "<td>";
@@ -34,7 +34,7 @@
       echo "</td>";
       echo "</tr>";
 
-      echo "</center></td>";
+      echo "</td>";
       echo "</table>";
       
     }
