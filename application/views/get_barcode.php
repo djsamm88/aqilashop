@@ -21,7 +21,7 @@
     for ($i=0; $i < $value['jumlah_barcode'] ; $i++) { 
 
       echo "<td align='center'>";
-      echo "<table>";
+      echo "<table border='1'>";
       echo "<tr>";
       echo "<td>";
       echo "<center><small>Rp.".rupiah($barang->harga_retail)."</small></center>";
