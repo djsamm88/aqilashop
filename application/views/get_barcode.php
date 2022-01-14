@@ -20,7 +20,7 @@
 
     for ($i=0; $i < $value['jumlah_barcode'] ; $i++) { 
 
-      echo "<td align='center' style='padding:10px' >";
+      echo "<td align='center' style='padding-left:10px;padding-right:10px;' >";
       echo "<table border='0'>";
       echo "<tr>";
       echo "<td>";
