@@ -20,8 +20,8 @@
 
     for ($i=0; $i < $value['jumlah_barcode'] ; $i++) { 
 
-      echo "<td align='center' style='padding-top:15px;padding-left:10px;padding-right:25px;' >";
-      echo "<table border='0'>";
+      echo "<td align='center' >";
+      echo "<table border='0' style='margin-top:20px;margin-left:25px;margin-right:25px;' >";
       echo "<tr>";
       echo "<td>";
       echo "<center><b>Rp.".rupiah($barang->harga_retail)."</b></center>";
