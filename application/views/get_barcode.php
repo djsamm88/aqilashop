@@ -17,12 +17,10 @@
 
 
       //echo "<center><b>Rp.".rupiah($barang->harga_retail)."</b></center>";
-      echo "<img style='margin-top:5px;' src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'> &nbsp;&nbsp;&nbsp;&nbsp;";
+      echo " &nbsp;&nbsp;&nbsp;&nbsp;<img style='margin-top:5px;' src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 
       
     }
     
-    echo"<br><br>";
-
   }
 ?>
