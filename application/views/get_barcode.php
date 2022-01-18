@@ -13,36 +13,11 @@
       $nama_barang = $barang->nama_barang;
     }
 
-    echo "<table>";
-
-      echo "<tr>";
-      
-
     for ($i=0; $i < $value['jumlah_barcode'] ; $i++) { 
-
-      echo "<td align='center' >";
-      echo "<table border='0' style='margin-top:20px;margin-left:25px;margin-right:25px;' >";
-      echo "<tr>";
-      echo "<td>";
-      echo "<center><b>Rp.".rupiah($barang->harga_retail)."</b></center>";
-      echo "</td>";
-      echo "</tr>";
-
-      echo "<tr>";
-      echo "<td>";
-      echo "<img src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'> <br>";
-      echo "</td>";
-      echo "</tr>";
-
-      echo "</td>";
-      echo "</table>";
-      
+      echo "<img src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'> &nbsp;&nbsp;&nbsp;&nbsp;";
     }
     
+    echo"<br><br>";
 
   }
-
-        
-      echo "</tr>";
-
 ?>
