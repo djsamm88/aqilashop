@@ -18,9 +18,11 @@
 
       //echo "<center><b>Rp.".rupiah($barang->harga_retail)."</b></center>";
       $margin=2;
+      $spasi = "&nbsp";
       if($i>0)
       {
         $margin+=0;
+        $spasi = "&nbsp&nbsp&nbsp&nbsp&nbsp";
       }
       echo "<center>";
       echo " <img style='margin:".$margin."px;padding:".$margin."px' src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'>";
