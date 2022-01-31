@@ -20,7 +20,7 @@
       $margin=2;
       if($i>0)
       {
-        $margin+=1;
+        $margin+=0;
       }
       echo "<center>";
       echo " <img style='margin:".$margin."px;padding:".$margin."px' src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'>";
