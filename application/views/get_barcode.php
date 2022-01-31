@@ -34,7 +34,7 @@
         $spasi = "&nbsp&nbsp&nbsp&nbsp&nbsp";
       }
       echo "<div style=''>";
-      echo " <img style='padding:1mm;width:40mm; margin:3mm text-align:center;' src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'>";
+      echo " <img style='padding:1mm;width:40mm; margin:2mm; text-align:center;' src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'>";
       echo "</div>";
       
     }
