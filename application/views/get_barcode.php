@@ -23,7 +23,7 @@
         $margin+=2;
       }
       echo "<center>";
-      echo " <img style='margin:".$margin."px;padding:0px' src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'>";
+      echo " <img style='margin:".$margin."px;padding:".$margin."px' src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'>";
       echo "</center>";
       
     }
