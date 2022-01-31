@@ -33,7 +33,7 @@
         $margin+=0;
         $spasi = "&nbsp&nbsp&nbsp&nbsp&nbsp";
       }
-      echo "<div style='padding-top:5px;width:50mm; height:20mm; text-align:center'><br>";
+      echo "<div style='padding-top:5px;width:50mm; height:20mm; text-align:center'>";
       echo " <img style='margin:".$margin."px;padding:".$margin."px' src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'>";
       echo "</div>";
       
