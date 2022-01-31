@@ -5,7 +5,7 @@
     padding: 0 !important;
   }
   div{
-    padding-top: 2px;
+    padding-top: 2px !important;
   }
 </style>
 <?php 
