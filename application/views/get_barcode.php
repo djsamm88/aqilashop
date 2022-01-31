@@ -1,4 +1,10 @@
 <script type="text/javascript">window.print();</script>
+<style type="text/css">
+  html,body{
+    margin:0 !important;
+    padding: 0 !important;
+  }
+</style>
 <?php 
   foreach ($all as $key => $value) {
     //echo ($value['jumlah_barcode']);
