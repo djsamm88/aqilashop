@@ -4,6 +4,9 @@
     margin:0 !important;
     padding: 0 !important;
   }
+  div{
+    padding-top: 2px;
+  }
 </style>
 <?php 
   foreach ($all as $key => $value) {
