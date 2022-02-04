@@ -33,9 +33,9 @@
         $margin+=0;
         $spasi = "&nbsp&nbsp&nbsp&nbsp&nbsp";
       }
-      echo "<div style='text-align:center; padding:0px !important; margin:0px !important; border:1px solid #000; width:50mm; height:18 mm;' >";
+      //echo "<div style='text-align:center; padding:0px !important; margin:0px !important; border:1px solid #000; width:50mm; height:18 mm;' >";
       echo " <img style='padding-top:0mm;width:37mm; height:15 mm; margin-bottom:1mm;margin-top:1mm; ' src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'>";
-      echo "</div>";
+      //echo "</div>";
       
     } 
     
