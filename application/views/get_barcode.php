@@ -28,12 +28,14 @@
       //echo "<center><b>Rp.".rupiah($barang->harga_retail)."</b></center>";
       $margin=0;
       $spasi = "&nbsp";
+      $tebal_border = 0;
       if($i>0)
       {
         $margin+=0;
         $spasi = "&nbsp&nbsp&nbsp&nbsp&nbsp";
+        $tebal_border ++;
       }
-      echo "<div style='text-align:center; padding:0px !important; margin:0px !important; border:1px solid #fff; width:50mm; height:0 mm;' >";
+      echo "<div style='text-align:center; padding:0px !important; margin:0px !important; border:".$tebal_border."px solid #fff; width:50mm; height:0 mm;' >";
       echo " <img style='padding-top:0mm;height:15 mm; position:relative; margin-bottom:0mm;margin-top:1mm; ' src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'>";
       echo "</div>";
       
