@@ -25,7 +25,7 @@
     $tebal_border = 0;
     for ($i=0; $i < $value['jumlah_barcode'] ; $i++) { 
 
-      $tebal_border ++;
+      $tebal_border +=1.5;
       //echo "<center><b>Rp.".rupiah($barang->harga_retail)."</b></center>";
       $margin=0;
       $spasi = "&nbsp";
@@ -36,7 +36,7 @@
         $spasi = "&nbsp&nbsp&nbsp&nbsp&nbsp";
         
       }
-      echo "<div style='text-align:center; padding:0px !important; margin:0px !important; border:".$tebal_border."px solid #fff; width:50mm; height:0 mm;' >";
+      echo "<div style='text-align:center; padding:0px !important; margin:0px !important; border:".$tebal_border."px solid #000; width:50mm; height:0 mm;' >";
       echo " <img style='padding-top:0mm;height:15 mm; position:relative; margin-bottom:0mm;margin-top:1mm; ' src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'>";
       echo "</div>";
       
