@@ -38,8 +38,9 @@
       }
 
       //echo "<div style='text-align:center; position:relative;'>";
-     // echo "Rp.".rupiah($barang->harga_retail)."<br>";
+      
       echo " <img style='padding-top:0mm;width:30 mm;  margin-bottom:0mm;margin:4mm; ' src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'>";
+      echo "<span>Rp.".rupiah($barang->harga_retail)."</span>";
 
      // echo "</div>";
 
