@@ -39,7 +39,7 @@
         
       }
 
-      echo "<div class='col-xs-4'>";
+      echo "<div class='col-xs-4' style='padding:5mm'>";
       
       echo " <img style='padding-top:0mm;width:30 mm;' src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'>";
       echo "<br><span>Rp.".rupiah($barang->harga_retail)."</span>";
