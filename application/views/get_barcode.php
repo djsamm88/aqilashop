@@ -39,9 +39,9 @@
         
       }
 
-      echo "<div class='col-xs-4' style='padding:30px'>";
+      echo "<div class='col-xs-4' style='padding:50px'>";
       
-      echo " <center><img style='margin-top:2mm;width:90%;' src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'>";
+      echo " <center><img style='margin-top:2mm;width:85%;' src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'>";
       echo "<br><span style='position:absolute;margin-top:-10px'><small>".rupiah($barang->harga_retail)."</small></span></center>";
 
      echo "</div>";
