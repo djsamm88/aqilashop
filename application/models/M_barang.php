@@ -294,7 +294,7 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 	}
 
 
-
+ 
 
 	public function m_data_gudang_autocomplete($id_gudang,$cari)
 	{

@@ -698,7 +698,7 @@ $( function() {
         var serialize = {cari:term}; 
         $.get("<?php echo base_url()?>index.php/barang/json_barang_toko",serialize,
               function(data){
-                console.log(data[0]);
+                console.log(data);
 
                 var abc = data[0];
 
@@ -708,7 +708,7 @@ $( function() {
             })
           }
 
-
+ 
   });
 /******* ambil data auto enter ******/
 
