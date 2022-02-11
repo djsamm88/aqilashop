@@ -9,7 +9,7 @@
     padding: 0px !important;
   }
 </style>
-<div class="row" width='100mm'>
+<div class="row" style="width:100mm !important">
 <?php 
   foreach ($all as $key => $value) {
     //echo ($value['jumlah_barcode']);
