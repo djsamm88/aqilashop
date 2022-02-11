@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="<?php echo base_url()?>bower_components/bootstrap/dist/css/bootstrap.min.css">
 <script type="text/javascript">window.print();</script>
 <style type="text/css">
   html,body{
@@ -8,6 +9,7 @@
     padding: 0px !important;
   }
 </style>
+<div class="row">
 <?php 
   foreach ($all as $key => $value) {
     //echo ($value['jumlah_barcode']);
@@ -37,14 +39,15 @@
         
       }
 
-      //echo "<div style='text-align:center; position:relative;'>";
+      echo "<div class='col-xs-3'>";
       
-      echo " <img style='padding-top:0mm;width:30 mm;  margin-bottom:0mm;margin:4mm; ' src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'>";
+      echo " <img style='padding-top:0mm;width:30 mm;  margin-bottom:0mm;margin:5mm; ' src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'>";
       echo "<span>Rp.".rupiah($barang->harga_retail)."</span>";
 
-     // echo "</div>";
+     echo "</div>";
 
     } 
     
   }
 ?>
+</div>
