@@ -37,9 +37,10 @@
         
       }
 
-      echo " <img style='text-align:center; padding-top:0mm;height:15 mm; position:relative; margin-bottom:0mm;margin-top:1mm; ' src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'>";
-      
-      
+      echo "<div style='text-align:center; '>";
+      echo " <img style='padding-top:0mm;height:15 mm; position:relative; margin-bottom:0mm;margin-top:1mm; ' src='".base_url()."assets/barcode/barcode.php?codetype=Code128&size=40&text=$nama_barang&print=true'>";
+      echo "</div>";
+
     } 
     
   }
