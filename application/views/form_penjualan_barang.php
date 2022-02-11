@@ -696,6 +696,7 @@ $( function() {
         
 
         var serialize = {cari:term}; 
+        console.log("<?php echo base_url()?>index.php/barang/json_barang_toko?cari="+term);
         $.get("<?php echo base_url()?>index.php/barang/json_barang_toko",serialize,
               function(data){
                 console.log(data);
