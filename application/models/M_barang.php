@@ -314,29 +314,11 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 								)b
 								ON a.id =b.id_barang	
 								LEFT JOIN tbl_gudang c ON b.id_gudang=c.id_gudang
-								WHERE b.id_gudang='$id_gudang' AND (a.nama_barang LIKE '%$cari%' OR a.id LIKE '%$cari%') AND qty>0
+								WHERE b.id_gudang='$id_gudang' AND (a.nama_barang LIKE '%$cari%' OR a.id_barcode LIKE '%$cari%') AND qty>0
 								ORDER BY b.qty ASC
 					");
 
 
-		echo "SELECT a.*,IFNULL(b.qty,0) AS qty,b.id_gudang,c.nama_gudang,a.reminder
-								FROM tbl_barang a
-								INNER JOIN(
-										SELECT 
-											a.id_barang,a.id_gudang, 
-											IFNULL(a.qty,0)-IFNULL(b.qty,0) AS qty
-											 FROM 
-											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='masuk' GROUP BY id_barang,id_gudang
-											)a 
-											LEFT JOIN 
-											(SELECT id_barang,SUM(jumlah) AS qty,id_gudang FROM `tbl_barang_transaksi` WHERE jenis='keluar' OR jenis='pending_keluar' GROUP BY id_barang,id_gudang
-											)b 
-											ON a.id_barang=b.id_barang AND a.id_gudang=b.id_gudang
-								)b
-								ON a.id =b.id_barang	
-								LEFT JOIN tbl_gudang c ON b.id_gudang=c.id_gudang
-								WHERE b.id_gudang='$id_gudang' AND (a.nama_barang LIKE '%$cari%' OR a.id LIKE '%$cari%') AND qty>0
-								ORDER BY b.qty ASC";
 		return $q;
 	}
 
