@@ -11,7 +11,7 @@ if (!defined('BASEPATH'))exit('No direct script access allowed');
 
 	public function nama_barang($id)
 	{
-		$q = $this->db->query("SELECT nama_barang,id_barcode,harga_retail FROM tbl_barang WHERE id='$id'");
+		$q = $this->db->query("SELECT nama_barang,id_barcode,harga_retail,kode_harga FROM tbl_barang WHERE id='$id'");
 		return $q->result()[0];
 	}
 

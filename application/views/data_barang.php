@@ -44,7 +44,8 @@
               <th>Harga Beli</th>                     
               <th>Harga Retail</th>                     
               <th>Harga Lusin</th>                     
-              <th>Harga Koli</th>                     
+              <th>Harga Koli</th>       
+              <th>Kode Harga</th>                                   
               <th>Jumlah / Lusin</th>                     
               <th>Jumlah / Koli</th>                     
               <th>Reminder Gudang</th>                     
@@ -84,7 +85,9 @@
                 <td>".rupiah($x->harga_pokok)."</td>                
                 <td>".rupiah($x->harga_retail)."</td>                
                 <td>".rupiah($x->harga_lusin)."</td>                
-                <td>".rupiah($x->harga_koli)."</td>                
+                <td>".rupiah($x->harga_koli)."</td>      
+                <td>".($x->kode_harga)."</td>      
+
                 <td>".rupiah($x->jum_per_lusin)."</td>     
                 <td>".rupiah($x->jum_per_koli)."</td>     
                 <td>$x->reminder</td>                           
@@ -164,6 +167,11 @@
             <div style="clear: both;"></div><br>
 
 
+        <div class="col-sm-4">Kode Harga</div>
+            <div class="col-sm-8"><input type="text" name="kode_harga" id="kode_harga" required="required" class="form-control " placeholder="kode_harga"></div>
+            <div style="clear: both;"></div><br>
+
+
 
         <div class="col-sm-4">Jumlah/Lusin</div>
             <div class="col-sm-8"><input type="text" name="jum_per_lusin" id="jum_per_lusin" required="required" class="form-control nomor" placeholder="jum_per_lusin" ></div>
@@ -231,6 +239,7 @@ function edit(id)
     $("#harga_koli").val(e[0].harga_koli);
     $("#jum_per_koli").val(e[0].jum_per_koli);
     $("#jum_per_lusin").val(e[0].jum_per_lusin);
+    $("#kode_harga").val(e[0].kode_harga);
 
     $("#harga_pokok").val(e[0].harga_pokok);
     $("#reminder").val(e[0].reminder);
