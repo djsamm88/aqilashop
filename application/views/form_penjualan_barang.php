@@ -103,16 +103,16 @@ if(isset($group_penjualan))
   <div class="row">
   
   <div class="col-sm-3">
-    <input type="text" name="nama_pembeli" id="nama_pembeli" value="<?php echo @$data[0]->nama_pembeli?>" class="form-control" required placeholder="Nama pembeli">
-    <input type="hidden" name="id_pelanggan" id="id_pelanggan" value="<?php echo @$data[0]->id_pelanggan?>">
+    <input type="text" name="nama_pembeli" id="nama_pembeli" value="customer" class="form-control"  placeholder="Nama pembeli">
+    <input type="hidden" name="id_pelanggan" id="id_pelanggan" value="">
     <small><i>Nama Pembeli</i></small>
   </div>
   <div class="col-sm-3">
-    <input type="text" name="hp_pembeli" id="hp_pembeli" readonly value="<?php echo @$data[0]->hp_pembeli?>" class="form-control" required placeholder="HP pembeli">
+    <input type="text" name="hp_pembeli" id="hp_pembeli" readonly value="08" class="form-control" required placeholder="HP pembeli">
     <small><i>HP Pembeli</i></small>
   </div>
   <div class="col-sm-3">
-    <textarea name="alamat" value="<?php echo @$data[0]->alamat?>" readonly class="form-control" placeholder="alamat" id="alamat"><?php echo @$data[0]->alamat?></textarea>
+    <textarea name="alamat" value="<?php echo @$data[0]->alamat?>" readonly class="form-control" placeholder="alamat" id="alamat">-</textarea>
     <small><i>Alamat</i></small>
   </div>
   <div class="col-sm-3">
